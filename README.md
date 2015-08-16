@@ -10,7 +10,7 @@ Create a new operation queue.
 
 #### `queue.push(fn, [cb])`
 
-Enqueue operation `fn`, optionally calling `cb` on completion. `fn` will receive a single callback as an argument, which in turn expects arguments `(err, res)`.
+Enqueue operation `fn`, optionally calling `cb` on completion. `fn` will receive a single callback as an argument that you must call to indicate that the opearation is complete; any arguments will be forwarded to your own callback.
 
 #### `queue.close([cb])`
 
