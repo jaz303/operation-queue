@@ -1,6 +1,6 @@
 # operation-queue
 
-Queue asynchronous operations for serial execution with optional completion callbacks. At any point the queue can be cancelled. When cancelled, the queue will a) wait for any pending operation to complete and b) fire the callbacks of all other pending jobs, indicating that the operations were cancelled. If any new operation is added to a cancelled queue its callback will also be invoked asynchronously indicating that it was cancelled.
+Queue asynchronous operations for serial execution with optional completion callbacks. At any point the queue can be cancelled. When cancelled, the queue will a) wait for any pending operation to complete and b) fire the callbacks of all other pending jobs, indicating that they were cancelled. Any new operation added to a cancelled queue will also receive an asynchronous callback indicating that it was cancelled.
 
 ## API
 
