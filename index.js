@@ -15,7 +15,7 @@ function OperationQueue() {
 
 OperationQueue.prototype.push = function(fn, cb) {
     if (this._state > S_BUSY) {
-        setTimeout(function() { cb(new Error(CANCELLED)); }, 0);
+        setTimeout(function() { cb(CANCELLED); }, 0);
     } else {
         this._jobs.push(fn, cb);
         if (this._state === S_READY) {

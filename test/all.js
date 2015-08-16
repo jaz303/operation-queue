@@ -82,3 +82,45 @@ test("cancellation cancels remaining operations", function(assert) {
     });
 
 });
+
+test("pushing function to cancelled queue is not run", function(assert) {
+
+    assert.plan(5);
+
+    var q = new OQ();
+    var out = '';
+
+    q.push(function(done) {
+        setTimeout(function() {
+            out += 'a';
+            done();
+        }, 0);
+    });
+
+    q.close(function() {
+        assert.equal(out, 'a');
+    
+        var c2 = false;
+        q.push(function(done) {
+            setTimeout(function() {
+                c2 = true;
+                done();
+            }, 0); 
+        }, function(err) {
+            assert.notOk(c2);
+            assert.equal(err, OQ.CANCELLED);
+        });
+    });
+
+    var c1 = false;
+    q.push(function(done) {
+        setTimeout(function() {
+            c1 = true;
+            done();
+        }, 0); 
+    }, function(err) {
+        assert.notOk(c1);
+        assert.equal(err, OQ.CANCELLED);
+    });
+
+});
