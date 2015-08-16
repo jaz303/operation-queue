@@ -39,8 +39,8 @@ OperationQueue.prototype._drain = function() {
 	this._state = S_BUSY;
 	(function _next() {
 		var op = self._jobs.shift(), cb = self._jobs.shift();
-		op(function(err, res) {
-			cb && cb(err, res);
+		op(function() {
+			cb && cb.apply(null, arguments);
 			if (self._state === S_CLOSING) {
 				var err = new Error("queue cancelled");
 				err.cancelled = true;
