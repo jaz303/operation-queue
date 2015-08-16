@@ -1,15 +1,15 @@
 {
   "name": "operation-queue",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Cancellable, async serial function execution",
   "main": "index.js",
   "scripts": {
     "test": "node test/all.js"
   },
   "repository": {
-     "type": "git",
-     "url": "git://github.com/jaz303/operation-queue.git"
-   },
+    "type": "git",
+    "url": "git://github.com/jaz303/operation-queue.git"
+  },
   "keywords": [
     "queue",
     "serial",
