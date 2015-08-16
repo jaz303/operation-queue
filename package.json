@@ -6,6 +6,10 @@
   "scripts": {
     "test": "node test/all.js"
   },
+  "repository": {
+     "type": "git",
+     "url": "git://github.com/jaz303/operation-queue.git"
+   },
   "keywords": [
     "queue",
     "serial",
