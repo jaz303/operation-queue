@@ -1,0 +1,21 @@
+{
+  "name": "operation-queue",
+  "version": "1.0.0",
+  "description": "Cancellable, async serial function execution",
+  "main": "index.js",
+  "scripts": {
+    "test": "node test/all.js"
+  },
+  "keywords": [
+    "queue",
+    "serial",
+    "async",
+    "cancellable",
+    "operation"
+  ],
+  "author": "Jason Frame <jason@onehackoranother.com> (http://jasonframe.co.uk)",
+  "license": "ISC",
+  "devDependencies": {
+    "tape": "^4.2.0"
+  }
+}
