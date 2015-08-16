@@ -5,6 +5,8 @@ var S_READY		= 1,
 	S_CLOSING	= 3,
 	S_CLOSED	= 4;
 
+var CANCELLED = OperationQueue.CANCELLED = {};
+
 function OperationQueue() {
 	this._jobs = [];
 	this._state = S_READY;
@@ -13,7 +15,7 @@ function OperationQueue() {
 
 OperationQueue.prototype.push = function(fn, cb) {
 	if (this._state > S_BUSY) {
-		setTimeout(function() { cb(new Error("queue is closed")); }, 0);
+		setTimeout(function() { cb(new Error(CANCELLED)); }, 0);
 	} else {
 		this._jobs.push(fn, cb);
 		if (this._state === S_READY) {
@@ -42,11 +44,9 @@ OperationQueue.prototype._drain = function() {
 		op(function() {
 			cb && cb.apply(null, arguments);
 			if (self._state === S_CLOSING) {
-				var err = new Error("queue cancelled");
-				err.cancelled = true;
 				while (self._jobs.length) {
 					var _ = self._jobs.shift(), cancel = self._jobs.shift();
-					cancel && cancel(err);
+					cancel && cancel(CANCELLED);
 				}
 				self._state = S_CLOSED;
 				self._onClose.forEach(function(fn) { fn(); });

@@ -45,7 +45,7 @@ test("callback fires", function(assert) {
 
 test("cancellation cancels remaining operations", function(assert) {
 
-	assert.plan(7);
+	assert.plan(5);
 
 	var q = new OQ();
 	var out = '';
@@ -64,8 +64,7 @@ test("cancellation cancels remaining operations", function(assert) {
 		}, 0);
 	}, function(err, val) {
 		assert.ok(err);
-		assert.ok(err.message.match(/cancel/i));
-		assert.ok(err.cancelled);
+		assert.equal(err, OQ.CANCELLED);
 	});
 
 	q.push(function(done) {
@@ -75,8 +74,7 @@ test("cancellation cancels remaining operations", function(assert) {
 		}, 0);
 	}, function(err, val) {
 		assert.ok(err);
-		assert.ok(err.message.match(/cancel/i));
-		assert.ok(err.cancelled);
+		assert.equal(err, OQ.CANCELLED);
 	});
 
 	q.close(function() {

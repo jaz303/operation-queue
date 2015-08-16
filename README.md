@@ -14,4 +14,4 @@ Enqueue operation `fn`, optionally calling `cb` on completion. `fn` will receive
 
 #### `queue.close([cb])`
 
-Close the queue, optionally calling `cb` when the close operation is complete, by first waiting for any in-progress operation to complete. Any further remaining items in the queue will have their callbacks invoked with an error.
+Close the queue, optionally calling `cb` when the close operation is complete, by first waiting for any in-progress operation to complete. Any further remaining items in the queue will have their callbacks invoked with the value `OperaionQueue.CANCELLED`.
